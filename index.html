@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#f8fafc">
+    <title>RecoveryApp</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+            overflow: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .shell {
+            background: #ffffff;
+            width: 100%;
+            max-width: 385px;
+            max-height: calc(100dvh - 24px);
+            border-radius: 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+            padding: clamp(14px, 2.2vh, 20px) clamp(14px, 3.8vw, 18px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            animation: loadIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes loadIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: clamp(6px, 1.4vh, 12px);
+        }
+
+        .brand {
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: #0f172a;
+        }
+
+        .status-dot {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #059669;
+            background: #ecfdf5;
+            padding: 3px 9px;
+            border-radius: 100px;
+        }
+
+        .status-dot::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+        }
+
+        .info-trigger {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .info-trigger:active {
+            background: #e2e8f0;
+        }
+
+        .form-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: auto 0;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            text-align: left;
+        }
+
+        .input-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748b;
+            padding-left: 2px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 14px;
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            color: #0f172a;
+            font-family: inherit;
+            transition: border-color 0.15s ease, background 0.15s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #0f172a;
+            background: #ffffff;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 13px;
+            background: #0f172a;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: opacity 0.15s ease, transform 0.05s ease;
+        }
+
+        .btn-action:active {
+            opacity: 0.85;
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: clamp(8px, 1.4vh, 11px);
+            background: #f8fafc;
+            color: #334155;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: background 0.15s ease, transform 0.05s ease;
+        }
+
+        .btn-secondary:active {
+            background: #e2e8f0;
+            transform: scale(0.98);
+        }
+
+        .btn-logout {
+            width: 100%;
+            padding: clamp(6px, 1.2vh, 10px);
+            background: none;
+            color: #94a3b8;
+            border: none;
+            font-size: 0.76rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: clamp(2px, 0.8vh, 6px);
+            transition: color 0.15s ease;
+        }
+
+        .btn-logout:hover {
+            color: #64748b;
+        }
+
+        .clock-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: clamp(6px, 1.3vh, 10px);
+        }
+
+        .clock-box {
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
+            border-radius: 12px;
+            padding: clamp(6px, 1.2vh, 10px) 2px;
+            text-align: center;
+        }
+
+        .clock-val {
+            font-size: clamp(1.2rem, 3.2vh, 1.55rem);
+            font-weight: 800;
+            line-height: 1;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+
+        .clock-lbl {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        .track-wrap {
+            margin-bottom: clamp(6px, 1.3vh, 10px);
+        }
+
+        .track-rail {
+            width: 100%;
+            height: 7px;
+            background: #e2e8f0;
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .track-fill {
+            height: 100%;
+            width: 0%;
+            background: #0f172a;
+            border-radius: 100px;
+            transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .track-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .weeks-section {
+            margin-bottom: clamp(6px, 1.3vh, 10px);
+        }
+
+        .weeks-head {
+            font-size: 0.66rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748b;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .weeks-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+        }
+
+        .week-pill {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 3px 0;
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        .week-pill.done {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+            color: #059669;
+        }
+
+        .phase-box {
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: clamp(8px, 1.4vh, 12px);
+            margin-bottom: clamp(6px, 1.3vh, 10px);
+            text-align: left;
+        }
+
+        .phase-badge {
+            display: inline-block;
+            font-size: 0.66rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #2563eb;
+            margin-bottom: 2px;
+        }
+
+        .phase-desc {
+            font-size: clamp(0.76rem, 1.4vh, 0.82rem);
+            line-height: 1.35;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        .action-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: clamp(2px, 0.8vh, 6px);
+        }
+
+        .toast-banner {
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            z-index: 150;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sk-pulse {
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: pulse 1.2s infinite ease-in-out;
+            border-radius: 8px;
+        }
+
+        @keyframes pulse {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .sk-clock { height: 50px; margin-bottom: 10px; }
+        .sk-bar { height: 8px; margin-bottom: 10px; }
+        .sk-weeks { height: 40px; margin-bottom: 10px; }
+        .sk-phase { height: 65px; margin-bottom: 10px; }
+
+        .modal-bg {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+            z-index: 100;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 360px;
+            width: 100%;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            animation: modalPop 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.96) translateY(4px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-card.shake {
+            animation: shake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        .gallery-list {
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 10px 0;
+            padding-right: 2px;
+        }
+
+        .gallery-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .gallery-thumb {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #0f172a;
+        }
+
+        .gallery-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .btn-del {
+            background: none;
+            border: none;
+            color: #ef4444;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .lightbox-bg {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.96);
+            z-index: 300;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 310;
+        }
+
+        .lightbox-img-wrap {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .lightbox-img {
+            max-width: 96vw;
+            max-height: 92vh;
+            object-fit: contain;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: center center;
+            user-select: none;
+        }
+
+        .error-banner {
+            color: #ef4444;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="toast-banner" id="statusToast">
+        <span id="toastMsg">Saving...</span>
+    </div>
+
+    <div class="modal-bg" id="infoModal">
+        <div class="modal-card">
+            <h3 style="font-size: 1.05rem; margin-bottom: 8px;">RecoveryApp</h3>
+            <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin-bottom: 16px;">A private personal progress tracking tool with client-side encrypted media storage and server token authentication. Access is restricted to authorized credentials.</p>
+            <button class="btn-action" onclick="toggleModal('infoModal', false)">Close</button>
+        </div>
+    </div>
+
+    <div class="modal-bg" id="unlockVaultModal">
+        <div class="modal-card" id="vaultModalCard">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="font-size: 1.2rem;">🔒</span>
+                <h3 style="font-size: 1rem;">Vault Locked</h3>
+            </div>
+            <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 12px;">Enter your password to verify access and decrypt media.</p>
+            
+            <form onsubmit="event.preventDefault(); handleVaultUnlock();">
+                <input type="password" class="input-field" id="vaultUnlockPass" placeholder="Password" style="margin-bottom: 6px;" autocomplete="current-password">
+                <div class="error-banner" id="vaultUnlockError" style="margin-bottom: 10px; margin-top: 0;"></div>
+                <button type="submit" class="btn-action" id="vaultUnlockBtn">Verify & Unlock</button>
+                <button type="button" class="btn-secondary" style="margin-top: 8px;" onclick="closeVaultUnlock()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-bg" id="galleryModal">
+        <div class="modal-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 1rem;">Photo Vault</h3>
+                <span id="photoCount" style="font-size: 0.75rem; color: #64748b; font-weight: 700;">0 Logs</span>
+            </div>
+            <div class="gallery-list" id="galleryContainer">
+                <div style="text-align: center; color: #94a3b8; font-size: 0.85rem; padding: 20px 0;">Syncing Vault...</div>
+            </div>
+            <button class="btn-action" onclick="closeVaultModal()">Lock & Close Vault</button>
+        </div>
+    </div>
+
+    <div class="lightbox-bg" id="lightboxModal" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <div class="lightbox-img-wrap">
+            <img class="lightbox-img" id="lightboxImg" src="">
+        </div>
+    </div>
+
+    <input type="file" id="photoInput" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
+
+    <div class="shell" id="loadingShell">
+        <div>
+            <div class="top-row">
+                <div class="brand">RecoveryApp</div>
+                <div class="status-dot">Live Sync</div>
+            </div>
+            <div class="sk-clock sk-pulse"></div>
+            <div class="sk-bar sk-pulse"></div>
+            <div class="sk-weeks sk-pulse"></div>
+            <div class="sk-phase sk-pulse"></div>
+        </div>
+    </div>
+
+    <div class="shell hidden" id="loginScreen">
+        <div class="top-row">
+            <div class="brand">RecoveryApp</div>
+            <button class="info-trigger" onclick="toggleModal('infoModal', true)">i</button>
+        </div>
+        <form class="form-wrap" onsubmit="event.preventDefault(); handleLogin();">
+            <div class="input-group">
+                <label class="input-label" for="username">Username</label>
+                <input type="text" class="input-field" id="username" autocapitalize="none" autocomplete="username">
+            </div>
+            <div class="input-group">
+                <label class="input-label" for="password">Password</label>
+                <input type="password" class="input-field" id="password" autocomplete="current-password">
+            </div>
+            <button type="submit" class="btn-action" id="loginBtn">Sign In</button>
+            <div class="error-banner" id="errorMsg"></div>
+        </form>
+    </div>
+
+    <div class="shell hidden" id="dashboardScreen"></div>
+
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzBooo77fdffVu2J2MyVMIOUz_YF7Em1XMUegRFy3MWTYuRgHoikxJZJ5Npmn3eo6XD/exec';
+
+        let authToken = null;
+        let authUser = null;
+        let verifiedVaultPassword = null;
+        let isVaultUnlocked = false;
+        let clockTimer = null;
+        let currentPhotos = [];
+        let globalStartMS = 0;
+        let initialServerTime = 0;
+        let initialPerfTime = 0;
+        let currentZoom = 1;
+        let lastTapTime = 0;
+        let cachedClientIp = "unknown";
+        const decryptedCache = {};
+
+        async function fetchClientIp() {
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const d = await res.json();
+                if (d && d.ip) cachedClientIp = d.ip;
+            } catch(e) {}
+        }
+
+        window.onload = function() {
+            fetchClientIp();
+            const savedToken = localStorage.getItem('auth_token');
+            const savedUser = localStorage.getItem('auth_user');
+            if (savedToken && savedUser) {
+                authToken = savedToken;
+                authUser = savedUser;
+                validateExistingSession(savedToken);
+            } else {
+                showView('login');
+            }
+        };
+
+        function showView(view) {
+            document.getElementById('loadingShell').classList.add('hidden');
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('dashboardScreen').classList.add('hidden');
+
+            if (view === 'login') document.getElementById('loginScreen').classList.remove('hidden');
+            if (view === 'dashboard') document.getElementById('dashboardScreen').classList.remove('hidden');
+            if (view === 'loading') document.getElementById('loadingShell').classList.remove('hidden');
+        }
+
+        function toggleModal(id, show) {
+            document.getElementById(id).style.display = show ? 'flex' : 'none';
+        }
+
+        function showToast(msg, duration = 3000) {
+            const toast = document.getElementById('statusToast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.style.display = 'flex';
+            if (duration > 0) {
+                setTimeout(() => { toast.style.display = 'none'; }, duration);
+            }
+        }
+
+        async function handleLogin() {
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value.trim();
+            const btn = document.getElementById('loginBtn');
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (!user || !pass) return;
+
+            btn.innerText = "Verifying...";
+            btn.disabled = true;
+            errorMsg.innerText = "";
+
+            if (cachedClientIp === "unknown") await fetchClientIp();
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'login', username: user, password: pass, clientIp: cachedClientIp })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.token) {
+                    authToken = data.token;
+                    authUser = data.username;
+                    localStorage.setItem('auth_token', data.token);
+                    localStorage.setItem('auth_user', data.username);
+                    document.getElementById('password').value = '';
+                    currentPhotos = data.photos || [];
+                    globalStartMS = Number(data.startDate);
+                    initialServerTime = Number(data.serverNow) || new Date().getTime();
+                    initialPerfTime = performance.now();
+                    buildDashboard(data.startDate, data.payload);
+                } else {
+                    errorMsg.innerText = data.message || "Invalid credentials.";
+                }
+            } catch (err) {
+                errorMsg.innerText = "Connection failed. Check network.";
+            } finally {
+                btn.innerText = "Sign In";
+                btn.disabled = false;
+            }
+        }
+
+        async function validateExistingSession(token) {
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'validateSession', token: token })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    currentPhotos = data.photos || [];
+                    globalStartMS = Number(data.startDate);
+                    initialServerTime = Number(data.serverNow) || new Date().getTime();
+                    initialPerfTime = performance.now();
+                    buildDashboard(data.startDate, data.payload);
+                } else {
+                    handleLogout();
+                }
+            } catch (err) {
+                showView('login');
+            }
+        }
+
+        async function handleLogout() {
+            if (clockTimer) clearInterval(clockTimer);
+            const tokenToRevoke = authToken;
+            
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('auth_user');
+            authToken = null;
+            authUser = null;
+            verifiedVaultPassword = null;
+            isVaultUnlocked = false;
+            currentPhotos = [];
+            
+            document.getElementById('dashboardScreen').innerHTML = '';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            showView('login');
+
+            if (tokenToRevoke) {
+                try {
+                    await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify({ action: 'logout', token: tokenToRevoke })
+                    });
+                } catch(e) {}
+            }
+        }
+
+        function buf2hex(buffer) {
+            return Array.from(new Uint8Array(buffer)).map(x => x.toString(16).padStart(2, '0')).join('');
+        }
+
+        function hex2buf(hex) {
+            const bytes = new Uint8Array(hex.length / 2);
+            for (let i = 0; i < hex.length; i += 2) {
+                bytes[i / 2] = parseInt(hex.substr(i, 2), 16);
+            }
+            return bytes.buffer;
+        }
+
+        async function deriveKey(password, salt) {
+            const enc = new TextEncoder();
+            const keyMaterial = await crypto.subtle.importKey("raw", enc.encode(password), { name: "PBKDF2" }, false, ["deriveKey"]);
+            return crypto.subtle.deriveKey(
+                { name: "PBKDF2", salt: salt, iterations: 100000, hash: "SHA-256" },
+                keyMaterial,
+                { name: "AES-GCM", length: 256 },
+                false,
+                ["encrypt", "decrypt"]
+            );
+        }
+
+        async function encryptData(plainText, password) {
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const key = await deriveKey(password, salt);
+            const enc = new TextEncoder();
+            const encrypted = await crypto.subtle.encrypt({ name: "AES-GCM", iv: iv }, key, enc.encode(plainText));
+
+            return JSON.stringify({
+                s: buf2hex(salt),
+                i: buf2hex(iv),
+                d: buf2hex(encrypted)
+            });
+        }
+
+        async function decryptData(packedJsonStr, password) {
+            const packed = JSON.parse(packedJsonStr);
+            const salt = new Uint8Array(hex2buf(packed.s));
+            const iv = new Uint8Array(hex2buf(packed.i));
+            const data = hex2buf(packed.d);
+
+            const key = await deriveKey(password, salt);
+            const decrypted = await crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, key, data);
+            const dec = new TextDecoder();
+            return dec.decode(decrypted);
+        }
+
+        function handleVaultAccess(actionType) {
+            if (!isVaultUnlocked || !verifiedVaultPassword) {
+                document.getElementById('vaultUnlockPass').value = '';
+                document.getElementById('vaultUnlockError').innerText = '';
+                toggleModal('unlockVaultModal', true);
+                window.pendingVaultAction = actionType;
+                setTimeout(() => {
+                    document.getElementById('vaultUnlockPass').focus();
+                }, 50);
+            } else {
+                if (actionType === 'upload') triggerUpload();
+                if (actionType === 'view') openVaultAndSync();
+            }
+        }
+
+        async function handleVaultUnlock() {
+            const pass = document.getElementById('vaultUnlockPass').value.trim();
+            const errEl = document.getElementById('vaultUnlockError');
+            const btn = document.getElementById('vaultUnlockBtn');
+            const card = document.getElementById('vaultModalCard');
+
+            if (!pass) return;
+
+            btn.innerText = "Verifying...";
+            btn.disabled = true;
+            errEl.innerText = "";
+
+            if (cachedClientIp === "unknown") await fetchClientIp();
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: 'verifyVaultPassword',
+                        token: authToken,
+                        password: pass,
+                        clientIp: cachedClientIp
+                    })
+                });
+
+                const res = await response.json();
+
+                if (res.success) {
+                    isVaultUnlocked = true;
+                    verifiedVaultPassword = pass;
+                    if (res.photos) currentPhotos = res.photos;
+                    if (res.serverNow) {
+                        initialServerTime = Number(res.serverNow);
+                        initialPerfTime = performance.now();
+                    }
+                    document.getElementById('vaultUnlockPass').value = '';
+                    toggleModal('unlockVaultModal', false);
+
+                    if (window.pendingVaultAction === 'upload') triggerUpload();
+                    if (window.pendingVaultAction === 'view') openVaultAndSync();
+                } else {
+                    errEl.innerText = res.message || "Incorrect password.";
+                    card.classList.remove('shake');
+                    void card.offsetWidth;
+                    card.classList.add('shake');
+                    document.getElementById('vaultUnlockPass').focus();
+                }
+            } catch(e) {
+                errEl.innerText = "Verification failed. Check network.";
+            } finally {
+                btn.innerText = "Verify & Unlock";
+                btn.disabled = false;
+            }
+        }
+
+        function closeVaultUnlock() {
+            document.getElementById('vaultUnlockPass').value = '';
+            document.getElementById('vaultUnlockError').innerText = '';
+            toggleModal('unlockVaultModal', false);
+            window.pendingVaultAction = null;
+        }
+
+        function closeVaultModal() {
+            toggleModal('galleryModal', false);
+            isVaultUnlocked = false;
+            verifiedVaultPassword = null;
+        }
+
+        function triggerUpload() {
+            document.getElementById('photoInput').click();
+        }
+
+        async function handlePhotoUpload(e) {
+            const file = e.target.files[0];
+            if (!file || !authToken || !verifiedVaultPassword) return;
+
+            showToast("Encrypting...", 0);
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const img = new Image();
+                img.onload = async function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+                    const maxDim = 1000;
+
+                    if (width > height && width > maxDim) {
+                        height = Math.round((height * maxDim) / width);
+                        width = maxDim;
+                    } else if (height > maxDim) {
+                        width = Math.round((width * maxDim) / height);
+                        height = maxDim;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    const optimizedBase64 = canvas.toDataURL('image/jpeg', 0.65);
+                    const encrypted = await encryptData(optimizedBase64, verifiedVaultPassword);
+
+                    showToast("Saving to Drive Vault...", 0);
+
+                    try {
+                        const response = await fetch(SCRIPT_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                            body: JSON.stringify({
+                                action: 'uploadPhoto',
+                                token: authToken,
+                                encryptedData: encrypted
+                            })
+                        });
+                        const res = await response.json();
+                        if (res.success && res.photo) {
+                            decryptedCache[res.photo.fileId] = optimizedBase64;
+                            currentPhotos.unshift(res.photo);
+                            if (res.serverNow) {
+                                initialServerTime = Number(res.serverNow);
+                                initialPerfTime = performance.now();
+                            }
+                            showToast("Saved!", 2500);
+                            toggleModal('galleryModal', true);
+                            renderGallery();
+                        } else {
+                            showToast("Upload error: " + (res.message || "Failed"), 3000);
+                        }
+                    } catch(err) {
+                        showToast("Upload failed. Check network.", 3000);
+                    }
+                };
+                img.src = evt.target.result;
+            };
+            reader.readAsDataURL(file);
+            e.target.value = '';
+        }
+
+        async function openVaultAndSync() {
+            toggleModal('galleryModal', true);
+            renderGallery();
+
+            if (!authToken) return;
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: 'getPhotosList',
+                        token: authToken
+                    })
+                });
+                const res = await response.json();
+                if (res.success && res.photos) {
+                    currentPhotos = res.photos;
+                    if (res.serverNow) {
+                        initialServerTime = Number(res.serverNow);
+                        initialPerfTime = performance.now();
+                    }
+                    renderGallery();
+                }
+            } catch(err) {}
+        }
+
+        async function renderGallery() {
+            const container = document.getElementById('galleryContainer');
+            document.getElementById('photoCount').innerText = currentPhotos.length + " Logs";
+
+            if (currentPhotos.length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #94a3b8; font-size: 0.85rem; padding: 20px 0;">No logs yet</div>';
+                return;
+            }
+
+            let html = '';
+            for (let item of currentPhotos) {
+                const clockText = item.clockSnapshot || new Date(item.timestamp).toLocaleDateString();
+                const cachedImg = decryptedCache[item.fileId];
+                const imgHtml = cachedImg
+                    ? `<img src="${cachedImg}" class="gallery-thumb" onclick="openLightbox('${cachedImg}')">`
+                    : `<div id="imgPlaceholder_${item.fileId}" style="height: 150px; background: #0f172a; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: #94a3b8;">Decrypting...</div>`;
+
+                html += `
+                    <div class="gallery-item" id="photoCard_${item.fileId}">
+                        <div class="gallery-meta">
+                            <span>${clockText}</span>
+                            <button class="btn-del" onclick="deletePhoto('${item.fileId}')">Delete</button>
+                        </div>
+                        ${imgHtml}
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+
+            for (let item of currentPhotos) {
+                if (decryptedCache[item.fileId]) continue;
+                try {
+                    const response = await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify({
+                            action: 'getPhoto',
+                            token: authToken,
+                            fileId: item.fileId
+                        })
+                    });
+                    const res = await response.json();
+                    if (res.success && verifiedVaultPassword) {
+                        const decryptedBase64 = await decryptData(res.encryptedData, verifiedVaultPassword);
+                        decryptedCache[item.fileId] = decryptedBase64;
+                        const placeholder = document.getElementById(`imgPlaceholder_${item.fileId}`);
+                        if (placeholder) {
+                            placeholder.outerHTML = `<img src="${decryptedBase64}" class="gallery-thumb" onclick="openLightbox('${decryptedBase64}')">`;
+                        }
+                    }
+                } catch(err) {}
+            }
+        }
+
+        async function deletePhoto(fileId) {
+            if (!authToken) return;
+            const card = document.getElementById(`photoCard_${fileId}`);
+            if (card) card.style.opacity = '0.3';
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: 'deletePhoto',
+                        token: authToken,
+                        fileId: fileId
+                    })
+                });
+                const res = await response.json();
+                if (res.success) {
+                    delete decryptedCache[fileId];
+                    currentPhotos = currentPhotos.filter(p => p.fileId !== fileId);
+                    document.getElementById('photoCount').innerText = currentPhotos.length + " Logs";
+                    if (card) card.remove();
+                    if (currentPhotos.length === 0) {
+                        document.getElementById('galleryContainer').innerHTML = '<div style="text-align: center; color: #94a3b8; font-size: 0.85rem; padding: 20px 0;">No logs yet</div>';
+                    }
+                }
+            } catch(err) {
+                if (card) card.style.opacity = '1';
+            }
+        }
+
+        function openLightbox(src) {
+            currentZoom = 1;
+            const img = document.getElementById('lightboxImg');
+            img.src = src;
+            img.style.transform = 'scale(1)';
+            document.getElementById('lightboxModal').style.display = 'flex';
+        }
+
+        function closeLightbox(e) {
+            if (e && e.target && e.target.id === 'lightboxImg') return;
+            document.getElementById('lightboxModal').style.display = 'none';
+        }
+
+        document.getElementById('lightboxImg').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const now = new Date().getTime();
+            if (now - lastTapTime < 300) {
+                currentZoom = currentZoom === 1 ? 2.4 : 1;
+                this.style.transform = `scale(${currentZoom})`;
+            }
+            lastTapTime = now;
+        });
+
+        function buildDashboard(startMS, payload) {
+            if (clockTimer) clearInterval(clockTimer);
+
+            function updateClock() {
+                const currentCloudTime = initialServerTime + (performance.now() - initialPerfTime);
+                const totalSecs = Math.max(0, Math.floor((currentCloudTime - startMS) / 1000));
+
+                const days = Math.floor(totalSecs / 86400);
+                const hours = Math.floor((totalSecs % 86400) / 3600);
+                const mins = Math.floor((totalSecs % 3600) / 60);
+                const secs = totalSecs % 60;
+
+                const daysEl = document.getElementById('clkDays');
+                const hrsEl = document.getElementById('clkHours');
+                const minsEl = document.getElementById('clkMins');
+                const secsEl = document.getElementById('clkSecs');
+
+                if (daysEl) daysEl.innerText = days;
+                if (hrsEl) hrsEl.innerText = String(hours).padStart(2, '0');
+                if (minsEl) minsEl.innerText = String(mins).padStart(2, '0');
+                if (secsEl) secsEl.innerText = String(secs).padStart(2, '0');
+            }
+
+            const initialCloudTime = initialServerTime || new Date().getTime();
+            const elapsed = initialCloudTime - startMS;
+            let daysElapsed = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+            if (daysElapsed < 0) daysElapsed = 0;
+
+            const daysRemaining = 90 - daysElapsed;
+            let percent = Math.min(100, Math.max(0, Math.floor((daysElapsed / 90) * 100)));
+
+            const currentWeeks = Math.min(13, Math.floor(daysElapsed / 7));
+            let weeksHTML = '';
+            for (let w = 1; w <= 13; w++) {
+                const isDone = w <= currentWeeks;
+                weeksHTML += `<div class="week-pill ${isDone ? 'done' : ''}">${isDone ? '✓ ' : ''}W${w}</div>`;
+            }
+
+            let currentStage = "";
+            let currentDesc = "";
+            for (let m of payload.milestones) {
+                if (daysElapsed <= m.maxDays) {
+                    currentStage = m.stage;
+                    currentDesc = m.desc;
+                    break;
+                }
+            }
+
+            const dashboard = document.getElementById('dashboardScreen');
+            dashboard.innerHTML = `
+                <div>
+                    <div class="top-row">
+                        <div class="brand">${payload.header}</div>
+                        <div class="status-dot">Live Sync</div>
+                    </div>
+
+                    <div class="clock-grid">
+                        <div class="clock-box">
+                            <div class="clock-val" id="clkDays">0</div>
+                            <div class="clock-lbl">Days</div>
+                        </div>
+                        <div class="clock-box">
+                            <div class="clock-val" id="clkHours">00</div>
+                            <div class="clock-lbl">Hours</div>
+                        </div>
+                        <div class="clock-box">
+                            <div class="clock-val" id="clkMins">00</div>
+                            <div class="clock-lbl">Mins</div>
+                        </div>
+                        <div class="clock-box">
+                            <div class="clock-val" id="clkSecs">00</div>
+                            <div class="clock-lbl">Secs</div>
+                        </div>
+                    </div>
+
+                    <div class="track-wrap">
+                        <div class="track-rail">
+                            <div class="track-fill" id="trackFill"></div>
+                        </div>
+                        <div class="track-stats">
+                            <span>${percent}% Complete</span>
+                            <span>${daysRemaining <= 0 ? "Goal reached" : daysRemaining + " days left"}</span>
+                        </div>
+                    </div>
+
+                    <div class="weeks-section">
+                        <div class="weeks-head">7-Day Milestones</div>
+                        <div class="weeks-grid">${weeksHTML}</div>
+                    </div>
+
+                    <div class="phase-box">
+                        <div class="phase-badge">${currentStage}</div>
+                        <div class="phase-desc">${currentDesc}</div>
+                    </div>
+
+                    <div class="action-row">
+                        <button class="btn-secondary" onclick="handleVaultAccess('upload')">📷 Log Photo</button>
+                        <button class="btn-secondary" onclick="handleVaultAccess('view')">🖼️ Vault</button>
+                    </div>
+                </div>
+
+                <button class="btn-logout" onclick="handleLogout()">Log Out</button>
+            `;
+
+            showView('dashboard');
+            updateClock();
+            clockTimer = setInterval(updateClock, 1000);
+
+            setTimeout(() => {
+                const fill = document.getElementById('trackFill');
+                if (fill) fill.style.width = percent + '%';
+            }, 40);
+        }
+    </script>
+</body>
+</html>
