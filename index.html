@@ -19,8 +19,8 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            background-color: #f8fafc;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%);
             color: #0f172a;
             height: 100vh;
             height: 100dvh;
@@ -37,21 +37,21 @@
             width: 100%;
             max-width: 385px;
             max-height: calc(100dvh - 24px);
-            border-radius: 24px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+            border-radius: 28px;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.07), 0 1px 3px 0 rgba(15, 23, 42, 0.02);
             padding: clamp(14px, 2.2vh, 20px) clamp(14px, 3.8vw, 18px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            animation: loadIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: loadIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
             position: relative;
         }
 
         @keyframes loadIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(8px) scale(0.99); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .top-row {
@@ -61,51 +61,73 @@
             margin-bottom: clamp(6px, 1.4vh, 12px);
         }
 
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            background: #0f172a;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
         .brand {
             font-size: 1.05rem;
             font-weight: 800;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.4px;
             color: #0f172a;
         }
 
         .status-dot {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.72rem;
-            font-weight: 600;
+            gap: 5px;
+            font-size: 0.7rem;
+            font-weight: 700;
             color: #059669;
             background: #ecfdf5;
-            padding: 3px 9px;
+            padding: 3px 8px;
             border-radius: 100px;
+            border: 1px solid #d1fae5;
         }
 
         .status-dot::before {
             content: '';
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             background: #10b981;
+            box-shadow: 0 0 6px #10b981;
         }
 
         .info-trigger {
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             border: 1px solid #e2e8f0;
             background: #f8fafc;
             color: #64748b;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background 0.15s ease;
+            transition: all 0.15s ease;
         }
 
         .info-trigger:active {
             background: #e2e8f0;
+            transform: scale(0.92);
         }
 
         .form-wrap {
@@ -123,30 +145,31 @@
         }
 
         .input-label {
-            font-size: 0.72rem;
-            font-weight: 700;
+            font-size: 0.7rem;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             color: #64748b;
             padding-left: 2px;
         }
 
         .input-field {
             width: 100%;
-            padding: 12px 14px;
+            padding: 13px 15px;
             background: #f8fafc;
             border: 1.5px solid #e2e8f0;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 16px;
             color: #0f172a;
             font-family: inherit;
-            transition: border-color 0.15s ease, background 0.15s ease;
+            transition: all 0.15s ease;
         }
 
         .input-field:focus {
             outline: none;
             border-color: #0f172a;
             background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.05);
         }
 
         .btn-action {
@@ -155,17 +178,18 @@
             background: #0f172a;
             color: #ffffff;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 0.92rem;
             font-weight: 700;
             font-family: inherit;
             cursor: pointer;
             margin-top: 4px;
-            transition: opacity 0.15s ease, transform 0.05s ease;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+            transition: all 0.15s ease;
         }
 
         .btn-action:active {
-            opacity: 0.85;
+            opacity: 0.9;
             transform: scale(0.98);
         }
 
@@ -173,7 +197,7 @@
             width: 100%;
             padding: clamp(8px, 1.4vh, 11px);
             background: #f8fafc;
-            color: #334155;
+            color: #1e293b;
             border: 1.5px solid #e2e8f0;
             border-radius: 12px;
             font-size: 0.8rem;
@@ -184,17 +208,41 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            transition: background 0.15s ease, transform 0.05s ease;
+            transition: all 0.15s ease;
         }
 
         .btn-secondary:active {
-            background: #e2e8f0;
+            background: #edf2f7;
+            transform: scale(0.98);
+        }
+
+        .btn-sos {
+            width: 100%;
+            padding: clamp(7px, 1.2vh, 10px);
+            background: #fff1f2;
+            color: #e11d48;
+            border: 1.5px solid #fecdd3;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: clamp(6px, 1.2vh, 8px);
+            transition: all 0.15s ease;
+        }
+
+        .btn-sos:active {
+            background: #ffe4e6;
             transform: scale(0.98);
         }
 
         .btn-logout {
             width: 100%;
-            padding: clamp(6px, 1.2vh, 10px);
+            padding: clamp(4px, 1vh, 8px);
             background: none;
             color: #94a3b8;
             border: none;
@@ -202,12 +250,12 @@
             font-weight: 700;
             font-family: inherit;
             cursor: pointer;
-            margin-top: clamp(2px, 0.8vh, 6px);
+            margin-top: clamp(2px, 0.6vh, 4px);
             transition: color 0.15s ease;
         }
 
         .btn-logout:hover {
-            color: #64748b;
+            color: #475569;
         }
 
         .clock-grid {
@@ -219,25 +267,27 @@
 
         .clock-box {
             background: #f8fafc;
-            border: 1px solid #f1f5f9;
-            border-radius: 12px;
-            padding: clamp(6px, 1.2vh, 10px) 2px;
+            border: 1px solid #edf2f7;
+            border-radius: 14px;
+            padding: clamp(7px, 1.3vh, 11px) 2px;
             text-align: center;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
         }
 
         .clock-val {
-            font-size: clamp(1.2rem, 3.2vh, 1.55rem);
+            font-size: clamp(1.25rem, 3.4vh, 1.6rem);
             font-weight: 800;
             line-height: 1;
             color: #0f172a;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.8px;
+            font-variant-numeric: tabular-nums;
         }
 
         .clock-lbl {
-            font-size: 0.6rem;
-            font-weight: 700;
+            font-size: 0.58rem;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             color: #64748b;
             margin-top: 3px;
         }
@@ -248,18 +298,19 @@
 
         .track-rail {
             width: 100%;
-            height: 7px;
-            background: #e2e8f0;
+            height: 8px;
+            background: #f1f5f9;
             border-radius: 100px;
             overflow: hidden;
+            border: 1px solid #e2e8f0;
         }
 
         .track-fill {
             height: 100%;
             width: 0%;
-            background: #0f172a;
+            background: linear-gradient(90deg, #0f172a 0%, #10b981 100%);
             border-radius: 100px;
-            transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .track-stats {
@@ -268,7 +319,7 @@
             font-size: 0.72rem;
             font-weight: 700;
             color: #64748b;
-            margin-top: 4px;
+            margin-top: 5px;
         }
 
         .weeks-section {
@@ -279,7 +330,7 @@
             font-size: 0.66rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             color: #64748b;
             margin-bottom: 5px;
             text-align: left;
@@ -294,23 +345,26 @@
         .week-pill {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 3px 0;
+            border-radius: 7px;
+            padding: 3.5px 0;
             font-size: 0.62rem;
             font-weight: 700;
             text-align: center;
             color: #94a3b8;
+            transition: all 0.2s ease;
         }
 
         .week-pill.done {
             background: #ecfdf5;
             border-color: #a7f3d0;
             color: #059669;
+            font-weight: 800;
         }
 
         .phase-box {
             border: 1px solid #e2e8f0;
-            background: #ffffff;
+            background: #f8fafc;
+            border-left: 3.5px solid #2563eb;
             border-radius: 14px;
             padding: clamp(8px, 1.4vh, 12px);
             margin-bottom: clamp(6px, 1.3vh, 10px);
@@ -319,17 +373,17 @@
 
         .phase-badge {
             display: inline-block;
-            font-size: 0.66rem;
+            font-size: 0.65rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             color: #2563eb;
             margin-bottom: 2px;
         }
 
         .phase-desc {
             font-size: clamp(0.76rem, 1.4vh, 0.82rem);
-            line-height: 1.35;
+            line-height: 1.38;
             color: #334155;
             font-weight: 500;
         }
@@ -338,7 +392,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
-            margin-bottom: clamp(2px, 0.8vh, 6px);
+            margin-bottom: clamp(4px, 1vh, 6px);
         }
 
         .toast-banner {
@@ -353,10 +407,11 @@
             font-size: 0.76rem;
             font-weight: 700;
             z-index: 150;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
             display: none;
             align-items: center;
             gap: 8px;
+            animation: loadIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .sk-pulse {
@@ -371,17 +426,18 @@
             100% { background-position: -200% 0; }
         }
 
-        .sk-clock { height: 50px; margin-bottom: 10px; }
-        .sk-bar { height: 8px; margin-bottom: 10px; }
-        .sk-weeks { height: 40px; margin-bottom: 10px; }
-        .sk-phase { height: 65px; margin-bottom: 10px; }
+        .sk-clock { height: 50px; margin-bottom: 10px; border-radius: 14px; }
+        .sk-bar { height: 8px; margin-bottom: 10px; border-radius: 100px; }
+        .sk-weeks { height: 40px; margin-bottom: 10px; border-radius: 8px; }
+        .sk-phase { height: 65px; margin-bottom: 10px; border-radius: 14px; }
 
         .modal-bg {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.45);
-            backdrop-filter: blur(4px);
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             align-items: center;
             justify-content: center;
             padding: 14px;
@@ -390,20 +446,22 @@
 
         .modal-card {
             background: #ffffff;
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 24px;
+            padding: 22px;
             max-width: 360px;
             width: 100%;
-            max-height: 80vh;
+            max-height: 85vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            animation: modalPop 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto;
         }
 
         @keyframes modalPop {
-            from { opacity: 0; transform: scale(0.96) translateY(4px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+            from { opacity: 0; transform: scale(0.95) translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .modal-card.shake {
@@ -414,6 +472,76 @@
             0%, 100% { transform: translateX(0); }
             20%, 60% { transform: translateX(-6px); }
             40%, 80% { transform: translateX(6px); }
+        }
+
+        /* Breathing Circle */
+        .breath-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 16px 0;
+        }
+
+        .breath-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            border: 2px solid #818cf8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #3730a3;
+            text-align: center;
+            animation: breathe 19s infinite ease-in-out;
+            box-shadow: 0 0 20px rgba(129, 140, 248, 0.3);
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(0.85); }
+            21% { transform: scale(1.15); }
+            58% { transform: scale(1.15); }
+        }
+
+        .sos-streak-tag {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .sos-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #334155;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .sos-num {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #fee2e2;
+            color: #e11d48;
+            font-size: 0.68rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
         }
 
         .gallery-list {
@@ -428,20 +556,26 @@
         .gallery-item {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 8px;
+            border-radius: 16px;
+            padding: 9px;
             display: flex;
             flex-direction: column;
             gap: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
         .gallery-thumb {
             width: 100%;
             height: 150px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             background: #0f172a;
+            transition: transform 0.15s ease;
+        }
+
+        .gallery-thumb:active {
+            transform: scale(0.99);
         }
 
         .gallery-meta {
@@ -454,12 +588,19 @@
         }
 
         .btn-del {
-            background: none;
+            background: #fee2e2;
             border: none;
-            color: #ef4444;
-            font-size: 0.72rem;
-            font-weight: 700;
+            color: #dc2626;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
             cursor: pointer;
+            transition: opacity 0.15s ease;
+        }
+
+        .btn-del:active {
+            opacity: 0.7;
         }
 
         .lightbox-bg {
@@ -513,9 +654,9 @@
         }
 
         .error-banner {
-            color: #ef4444;
+            color: #dc2626;
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
             text-align: center;
             margin-top: 8px;
         }
@@ -529,6 +670,30 @@
         <span id="toastMsg">Saving...</span>
     </div>
 
+    <!-- SOS URGE MODAL -->
+    <div class="modal-bg" id="sosModal">
+        <div class="modal-card" style="text-align: center;">
+            <div style="font-size: 1.3rem; margin-bottom: 2px;">🛡️</div>
+            <h3 style="font-size: 1.05rem; margin-bottom: 4px; color: #0f172a;">Urge Grounding Protocol</h3>
+            <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 10px;">Pause. A 5-minute impulse will undo weeks of epidermal cell restructuring.</p>
+            
+            <div class="sos-streak-tag" id="sosStreakDisplay">Loading streak...</div>
+
+            <div class="breath-wrap">
+                <div class="breath-circle" id="breathText">Breathe In</div>
+            </div>
+
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 10px; margin-bottom: 14px;">
+                <div class="sos-step"><span class="sos-num">1</span><span>Close private tabs & put the phone down immediately.</span></div>
+                <div class="sos-step"><span class="sos-num">2</span><span>Wash the area with cool water to calm nerve stimulation.</span></div>
+                <div class="sos-step"><span class="sos-num">3</span><span>Apply a thin layer of healing ointment and wear loose cotton boxers.</span></div>
+            </div>
+
+            <button class="btn-action" onclick="closeSosModal()">I Am Grounded (Stay Strong)</button>
+        </div>
+    </div>
+
+    <!-- INFO MODAL -->
     <div class="modal-bg" id="infoModal">
         <div class="modal-card">
             <h3 style="font-size: 1.05rem; margin-bottom: 8px;">RecoveryApp</h3>
@@ -537,6 +702,7 @@
         </div>
     </div>
 
+    <!-- UNLOCK VAULT MODAL -->
     <div class="modal-bg" id="unlockVaultModal">
         <div class="modal-card" id="vaultModalCard">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
@@ -554,11 +720,12 @@
         </div>
     </div>
 
+    <!-- PHOTO GALLERY MODAL -->
     <div class="modal-bg" id="galleryModal">
         <div class="modal-card">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <h3 style="font-size: 1rem;">Photo Vault</h3>
-                <span id="photoCount" style="font-size: 0.75rem; color: #64748b; font-weight: 700;">0 Logs</span>
+                <span id="photoCount" style="font-size: 0.72rem; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 100px; font-weight: 800;">0 Logs</span>
             </div>
             <div class="gallery-list" id="galleryContainer">
                 <div style="text-align: center; color: #94a3b8; font-size: 0.85rem; padding: 20px 0;">Syncing Vault...</div>
@@ -567,6 +734,7 @@
         </div>
     </div>
 
+    <!-- LIGHTBOX MODAL -->
     <div class="lightbox-bg" id="lightboxModal" onclick="closeLightbox(event)">
         <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
         <div class="lightbox-img-wrap">
@@ -576,10 +744,14 @@
 
     <input type="file" id="photoInput" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
 
+    <!-- SKELETON LOADING -->
     <div class="shell" id="loadingShell">
         <div>
             <div class="top-row">
-                <div class="brand">RecoveryApp</div>
+                <div class="brand-wrap">
+                    <div class="brand-icon">R</div>
+                    <div class="brand">RecoveryApp</div>
+                </div>
                 <div class="status-dot">Live Sync</div>
             </div>
             <div class="sk-clock sk-pulse"></div>
@@ -589,9 +761,13 @@
         </div>
     </div>
 
+    <!-- LOGIN SCREEN -->
     <div class="shell hidden" id="loginScreen">
         <div class="top-row">
-            <div class="brand">RecoveryApp</div>
+            <div class="brand-wrap">
+                <div class="brand-icon">R</div>
+                <div class="brand">RecoveryApp</div>
+            </div>
             <button class="info-trigger" onclick="toggleModal('infoModal', true)">i</button>
         </div>
         <form class="form-wrap" onsubmit="event.preventDefault(); handleLogin();">
@@ -608,6 +784,7 @@
         </form>
     </div>
 
+    <!-- DASHBOARD SCREEN -->
     <div class="shell hidden" id="dashboardScreen"></div>
 
     <script>
@@ -618,6 +795,7 @@
         let verifiedVaultPassword = null;
         let isVaultUnlocked = false;
         let clockTimer = null;
+        let breathTimer = null;
         let currentPhotos = [];
         let globalStartMS = 0;
         let initialServerTime = 0;
@@ -669,6 +847,33 @@
             if (duration > 0) {
                 setTimeout(() => { toast.style.display = 'none'; }, duration);
             }
+        }
+
+        function openSosModal() {
+            const currentCloudTime = initialServerTime + (performance.now() - initialPerfTime);
+            const totalSecs = Math.max(0, Math.floor((currentCloudTime - globalStartMS) / 1000));
+            const days = Math.floor(totalSecs / 86400);
+            const hours = Math.floor((totalSecs % 86400) / 3600);
+            
+            document.getElementById('sosStreakDisplay').innerText = `Current Streak: ${days} Days, ${hours} Hours Protected`;
+            toggleModal('sosModal', true);
+
+            let breathState = 0;
+            const el = document.getElementById('breathText');
+            el.innerText = "Inhale (4s)";
+            
+            if (breathTimer) clearInterval(breathTimer);
+            breathTimer = setInterval(() => {
+                breathState = (breathState + 1) % 3;
+                if (breathState === 0) el.innerText = "Inhale (4s)";
+                if (breathState === 1) el.innerText = "Hold (7s)";
+                if (breathState === 2) el.innerText = "Exhale (8s)";
+            }, 6000);
+        }
+
+        function closeSosModal() {
+            if (breathTimer) clearInterval(breathTimer);
+            toggleModal('sosModal', false);
         }
 
         async function handleLogin() {
@@ -1015,7 +1220,7 @@
                 const cachedImg = decryptedCache[item.fileId];
                 const imgHtml = cachedImg
                     ? `<img src="${cachedImg}" class="gallery-thumb" onclick="openLightbox('${cachedImg}')">`
-                    : `<div id="imgPlaceholder_${item.fileId}" style="height: 150px; background: #0f172a; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: #94a3b8;">Decrypting...</div>`;
+                    : `<div id="imgPlaceholder_${item.fileId}" style="height: 150px; background: #0f172a; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: #94a3b8;">Decrypting...</div>`;
 
                 html += `
                     <div class="gallery-item" id="photoCard_${item.fileId}">
@@ -1159,7 +1364,10 @@
             dashboard.innerHTML = `
                 <div>
                     <div class="top-row">
-                        <div class="brand">${payload.header}</div>
+                        <div class="brand-wrap">
+                            <div class="brand-icon">R</div>
+                            <div class="brand">${payload.header}</div>
+                        </div>
                         <div class="status-dot">Live Sync</div>
                     </div>
 
@@ -1201,6 +1409,8 @@
                         <div class="phase-badge">${currentStage}</div>
                         <div class="phase-desc">${currentDesc}</div>
                     </div>
+
+                    <button class="btn-sos" onclick="openSosModal()">⚡ Urge Protocol</button>
 
                     <div class="action-row">
                         <button class="btn-secondary" onclick="handleVaultAccess('upload')">📷 Log Photo</button>
