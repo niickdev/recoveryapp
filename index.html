@@ -51,7 +51,7 @@
 
         @keyframes loadIn {
             from { opacity: 0; transform: translateY(8px) scale(0.99); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .top-row {
@@ -68,16 +68,14 @@
         }
 
         .brand-icon {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             border-radius: 8px;
             background: #0f172a;
             color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.72rem;
-            font-weight: 800;
         }
 
         .brand {
@@ -110,13 +108,13 @@
         }
 
         .info-trigger {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             border: 1px solid #e2e8f0;
             background: #f8fafc;
             color: #64748b;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -186,6 +184,10 @@
             margin-top: 4px;
             box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
             transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-action:active {
@@ -199,7 +201,7 @@
             background: #f8fafc;
             color: #1e293b;
             border: 1.5px solid #e2e8f0;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 0.8rem;
             font-weight: 700;
             font-family: inherit;
@@ -216,14 +218,14 @@
             transform: scale(0.98);
         }
 
-        .btn-sos {
+        .btn-urge {
             width: 100%;
-            padding: clamp(7px, 1.2vh, 10px);
-            background: #fff1f2;
+            padding: clamp(8px, 1.3vh, 11px);
+            background: #ffffff;
             color: #e11d48;
             border: 1.5px solid #fecdd3;
-            border-radius: 12px;
-            font-size: 0.78rem;
+            border-radius: 14px;
+            font-size: 0.8rem;
             font-weight: 800;
             font-family: inherit;
             cursor: pointer;
@@ -232,11 +234,12 @@
             justify-content: center;
             gap: 6px;
             margin-bottom: clamp(6px, 1.2vh, 8px);
+            box-shadow: 0 2px 6px rgba(225, 29, 72, 0.06);
             transition: all 0.15s ease;
         }
 
-        .btn-sos:active {
-            background: #ffe4e6;
+        .btn-urge:active {
+            background: #fff1f2;
             transform: scale(0.98);
         }
 
@@ -446,8 +449,8 @@
 
         .modal-card {
             background: #ffffff;
-            border-radius: 24px;
-            padding: 22px;
+            border-radius: 28px;
+            padding: 24px 20px;
             max-width: 360px;
             width: 100%;
             max-height: 85vh;
@@ -474,74 +477,73 @@
             40%, 80% { transform: translateX(6px); }
         }
 
-        /* Breathing Circle */
-        .breath-wrap {
+        .urge-icon-header {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: #fff1f2;
+            color: #e11d48;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin: 16px 0;
+            margin: 0 auto 12px auto;
         }
 
-        .breath-circle {
-            width: 90px;
-            height: 90px;
+        .urge-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .urge-subtitle {
+            font-size: 0.85rem;
+            color: #475569;
+            line-height: 1.45;
+            margin-bottom: 16px;
+        }
+
+        .urge-streak-pill {
+            background: #ecfdf5;
+            border: 1.5px solid #a7f3d0;
+            color: #065f46;
+            padding: 10px 14px;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.06);
+        }
+
+        .breath-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+        }
+
+        .breath-ring {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            background: #eff6ff;
             border: 2px solid #818cf8;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             font-weight: 800;
-            color: #3730a3;
+            color: #312e81;
             text-align: center;
-            animation: breathe 19s infinite ease-in-out;
-            box-shadow: 0 0 20px rgba(129, 140, 248, 0.3);
+            animation: breathCycle 8s infinite ease-in-out;
+            box-shadow: 0 0 25px rgba(129, 140, 248, 0.25);
         }
 
-        @keyframes breathe {
-            0%, 100% { transform: scale(0.85); }
-            21% { transform: scale(1.15); }
-            58% { transform: scale(1.15); }
-        }
-
-        .sos-streak-tag {
-            background: #ecfdf5;
-            border: 1px solid #a7f3d0;
-            color: #065f46;
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 0.78rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        .sos-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            font-size: 0.8rem;
-            color: #334155;
-            line-height: 1.4;
-            margin-bottom: 8px;
-            text-align: left;
-        }
-
-        .sos-num {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #fee2e2;
-            color: #e11d48;
-            font-size: 0.68rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-top: 1px;
+        @keyframes breathCycle {
+            0%, 100% { transform: scale(0.88); border-color: #93c5fd; color: #1e3a8a; background: #eff6ff; }
+            50% { transform: scale(1.12); border-color: #6366f1; color: #312e81; background: #e0e7ff; }
         }
 
         .gallery-list {
@@ -593,9 +595,12 @@
             color: #dc2626;
             font-size: 0.7rem;
             font-weight: 800;
-            padding: 3px 8px;
+            padding: 4px 8px;
             border-radius: 6px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
             transition: opacity 0.15s ease;
         }
 
@@ -620,14 +625,12 @@
             position: absolute;
             top: 16px;
             right: 16px;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
             color: #ffffff;
             border: none;
-            font-size: 1.1rem;
-            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -670,43 +673,36 @@
         <span id="toastMsg">Saving...</span>
     </div>
 
-    <!-- SOS URGE MODAL -->
-    <div class="modal-bg" id="sosModal">
+    <div class="modal-bg" id="urgeModal">
         <div class="modal-card" style="text-align: center;">
-            <div style="font-size: 1.3rem; margin-bottom: 2px;">🛡️</div>
-            <h3 style="font-size: 1.05rem; margin-bottom: 4px; color: #0f172a;">Urge Grounding Protocol</h3>
-            <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 10px;">Pause. A 5-minute impulse will undo weeks of epidermal cell restructuring.</p>
+            <div class="urge-icon-header">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div class="urge-title">Urge Control</div>
+            <div class="urge-subtitle">Pause. This urge is temporary. Don’t trade weeks of progress for a moment.</div>
             
-            <div class="sos-streak-tag" id="sosStreakDisplay">Loading streak...</div>
+            <div class="urge-streak-pill" id="urgeStreakDisplay">Current Streak: 0 Days, 0 Hours Protected</div>
 
-            <div class="breath-wrap">
-                <div class="breath-circle" id="breathText">Breathe In</div>
+            <div class="breath-container">
+                <div class="breath-ring" id="breathText">Inhale</div>
             </div>
 
-            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 10px; margin-bottom: 14px;">
-                <div class="sos-step"><span class="sos-num">1</span><span>Close private tabs & put the phone down immediately.</span></div>
-                <div class="sos-step"><span class="sos-num">2</span><span>Wash the area with cool water to calm nerve stimulation.</span></div>
-                <div class="sos-step"><span class="sos-num">3</span><span>Apply a thin layer of healing ointment and wear loose cotton boxers.</span></div>
-            </div>
-
-            <button class="btn-action" onclick="closeSosModal()">I Am Grounded (Stay Strong)</button>
+            <button class="btn-action" onclick="closeUrgeModal()">I Am in Control</button>
         </div>
     </div>
 
-    <!-- INFO MODAL -->
     <div class="modal-bg" id="infoModal">
         <div class="modal-card">
             <h3 style="font-size: 1.05rem; margin-bottom: 8px;">RecoveryApp</h3>
-            <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin-bottom: 16px;">A private personal progress tracking tool with client-side encrypted media storage and server token authentication. Access is restricted to authorized credentials.</p>
+            <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin-bottom: 16px;">A private personal medical tracking application designed to keep your information secure and accessible only to authorized users.</p>
             <button class="btn-action" onclick="toggleModal('infoModal', false)">Close</button>
         </div>
     </div>
 
-    <!-- UNLOCK VAULT MODAL -->
     <div class="modal-bg" id="unlockVaultModal">
         <div class="modal-card" id="vaultModalCard">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                <span style="font-size: 1.2rem;">🔒</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 <h3 style="font-size: 1rem;">Vault Locked</h3>
             </div>
             <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 12px;">Enter your password to verify access and decrypt media.</p>
@@ -720,7 +716,6 @@
         </div>
     </div>
 
-    <!-- PHOTO GALLERY MODAL -->
     <div class="modal-bg" id="galleryModal">
         <div class="modal-card">
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -734,9 +729,10 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX MODAL -->
     <div class="lightbox-bg" id="lightboxModal" onclick="closeLightbox(event)">
-        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-close" onclick="closeLightbox(event)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
         <div class="lightbox-img-wrap">
             <img class="lightbox-img" id="lightboxImg" src="">
         </div>
@@ -744,12 +740,13 @@
 
     <input type="file" id="photoInput" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
 
-    <!-- SKELETON LOADING -->
     <div class="shell" id="loadingShell">
         <div>
             <div class="top-row">
                 <div class="brand-wrap">
-                    <div class="brand-icon">R</div>
+                    <div class="brand-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
                     <div class="brand">RecoveryApp</div>
                 </div>
                 <div class="status-dot">Live Sync</div>
@@ -761,14 +758,17 @@
         </div>
     </div>
 
-    <!-- LOGIN SCREEN -->
     <div class="shell hidden" id="loginScreen">
         <div class="top-row">
             <div class="brand-wrap">
-                <div class="brand-icon">R</div>
+                <div class="brand-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
                 <div class="brand">RecoveryApp</div>
             </div>
-            <button class="info-trigger" onclick="toggleModal('infoModal', true)">i</button>
+            <button class="info-trigger" onclick="toggleModal('infoModal', true)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            </button>
         </div>
         <form class="form-wrap" onsubmit="event.preventDefault(); handleLogin();">
             <div class="input-group">
@@ -784,7 +784,6 @@
         </form>
     </div>
 
-    <!-- DASHBOARD SCREEN -->
     <div class="shell hidden" id="dashboardScreen"></div>
 
     <script>
@@ -849,31 +848,29 @@
             }
         }
 
-        function openSosModal() {
+        function openUrgeModal() {
             const currentCloudTime = initialServerTime + (performance.now() - initialPerfTime);
             const totalSecs = Math.max(0, Math.floor((currentCloudTime - globalStartMS) / 1000));
             const days = Math.floor(totalSecs / 86400);
             const hours = Math.floor((totalSecs % 86400) / 3600);
             
-            document.getElementById('sosStreakDisplay').innerText = `Current Streak: ${days} Days, ${hours} Hours Protected`;
-            toggleModal('sosModal', true);
+            document.getElementById('urgeStreakDisplay').innerText = `Current Streak: ${days} Days, ${hours} Hours Protected`;
+            toggleModal('urgeModal', true);
 
-            let breathState = 0;
+            let state = 0;
             const el = document.getElementById('breathText');
-            el.innerText = "Inhale (4s)";
+            el.innerText = "Inhale";
             
             if (breathTimer) clearInterval(breathTimer);
             breathTimer = setInterval(() => {
-                breathState = (breathState + 1) % 3;
-                if (breathState === 0) el.innerText = "Inhale (4s)";
-                if (breathState === 1) el.innerText = "Hold (7s)";
-                if (breathState === 2) el.innerText = "Exhale (8s)";
-            }, 6000);
+                state = (state + 1) % 2;
+                el.innerText = state === 0 ? "Inhale" : "Exhale";
+            }, 4000);
         }
 
-        function closeSosModal() {
+        function closeUrgeModal() {
             if (breathTimer) clearInterval(breathTimer);
-            toggleModal('sosModal', false);
+            toggleModal('urgeModal', false);
         }
 
         async function handleLogin() {
@@ -1226,7 +1223,10 @@
                     <div class="gallery-item" id="photoCard_${item.fileId}">
                         <div class="gallery-meta">
                             <span>${clockText}</span>
-                            <button class="btn-del" onclick="deletePhoto('${item.fileId}')">Delete</button>
+                            <button class="btn-del" onclick="deletePhoto('${item.fileId}')">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                                Delete
+                            </button>
                         </div>
                         ${imgHtml}
                     </div>
@@ -1365,7 +1365,9 @@
                 <div>
                     <div class="top-row">
                         <div class="brand-wrap">
-                            <div class="brand-icon">R</div>
+                            <div class="brand-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
                             <div class="brand">${payload.header}</div>
                         </div>
                         <div class="status-dot">Live Sync</div>
@@ -1410,11 +1412,20 @@
                         <div class="phase-desc">${currentDesc}</div>
                     </div>
 
-                    <button class="btn-sos" onclick="openSosModal()">⚡ Urge Protocol</button>
+                    <button class="btn-urge" onclick="openUrgeModal()">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Urge Control
+                    </button>
 
                     <div class="action-row">
-                        <button class="btn-secondary" onclick="handleVaultAccess('upload')">📷 Log Photo</button>
-                        <button class="btn-secondary" onclick="handleVaultAccess('view')">🖼️ Vault</button>
+                        <button class="btn-secondary" onclick="handleVaultAccess('upload')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                            Log Photo
+                        </button>
+                        <button class="btn-secondary" onclick="handleVaultAccess('view')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                            Vault
+                        </button>
                     </div>
                 </div>
 
